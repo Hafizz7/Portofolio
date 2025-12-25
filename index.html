@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Portofolio – Computer Vision, Android (Kotlin), Web (Laravel), Data/Excel." />
+  <title>Portofolio | Muh. Hafizz</title>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1833;
+      --muted:#9fb0d0;
+      --text:#eaf0ff;
+      --line:rgba(255,255,255,.08);
+      --accent:#7c5cff; /* ubah kalau mau */
+      --accent2:#35d1ff;
+      --ok:#2ee59d;
+      --warn:#ffd166;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(124,92,255,.22), transparent 55%),
+        radial-gradient(1000px 600px at 95% 5%, rgba(53,209,255,.20), transparent 55%),
+        radial-gradient(900px 500px at 40% 100%, rgba(46,229,157,.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:24px}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(11,16,32,.82), rgba(11,16,32,.50));
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 22px rgba(124,92,255,.55);
+    }
+    .nav-links{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+    .nav-links a{
+      padding:8px 10px;
+      border-radius:10px;
+      color:var(--muted);
+      border:1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* HERO */
+    .hero{
+      padding:46px 0 28px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-left{padding:26px}
+    .kicker{
+      color:var(--muted);
+      display:flex;
+      gap:10px;
+      align-items:center;
+      font-size:14px;
+    }
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.1;
+      letter-spacing:-.6px;
+    }
+    @media (max-width: 520px){ h1{font-size:36px} }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size:16px;
+      max-width: 62ch;
+    }
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#06102a;
+      box-shadow: 0 18px 45px rgba(124,92,255,.22);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0)}
+    .mini{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .mini a{
+      color:var(--muted);
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+
+    /* HERO RIGHT */
+    .hero-right{padding:18px; display:grid; gap:12px}
+    .card{
+      padding:16px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(15,24,51,.55);
+    }
+    .card h3{margin:0 0 6px; font-size:14px; color:var(--muted); font-weight:600}
+    .metric{
+      display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+      padding:10px 0;
+      border-top:1px dashed rgba(255,255,255,.10);
+    }
+    .metric:first-of-type{border-top:none}
+    .metric b{font-size:15px}
+    .metric span{color:var(--muted); font-size:13px}
+    .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    /* SECTIONS */
+    section{padding:26px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:12px;
+    }
+    .section-title h2{
+      margin:0; font-size:22px; letter-spacing:-.2px;
+    }
+    .section-title p{
+      margin:0; color:var(--muted); font-size:13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: 1fr 1fr} }
+    @media (max-width: 640px){ .grid{grid-template-columns: 1fr} }
+
+    .proj{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(15,24,51,.45);
+      transition: transform .15s ease;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .proj:hover{transform: translateY(-2px)}
+    .proj-top{display:flex; gap:10px; align-items:flex-start; justify-content:space-between}
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      color:var(--muted);
+      background: rgba(255,255,255,.02);
+    }
+    .proj h3{margin:0; font-size:16px}
+    .proj p{margin:0; color:var(--muted); font-size:13px}
+    .proj .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto}
+    .link{
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+    }
+    .link:hover{background: rgba(255,255,255,.05)}
+
+    /* TIMELINE / VALUES */
+    .two-col{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+    }
+    @media (max-width: 900px){ .two-col{grid-template-columns:1fr} }
+
+    .list{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(15,24,51,.40);
+    }
+    .list ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
+    .list li{margin:8px 0}
+    .hi{
+      color: var(--text);
+      font-weight:600;
+    }
+
+    /* CONTACT */
+    .contact{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:center;
+    }
+    @media (max-width: 900px){ .contact{grid-template-columns:1fr} }
+
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.15);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height: 110px; resize: vertical}
+    .form{
+      display:grid; gap:10px;
+    }
+    .foot{
+      padding:26px 0 40px;
+      color: var(--muted);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      border-top:1px solid var(--line);
+      margin-top:22px;
+    }
+
+    /* small helper */
+    .muted{color:var(--muted)}
+    .hr{height:1px; background:var(--line); margin:18px 0}
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <span class="dot"></span>
+        <span>Muh. Hafiz</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Proyek</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#about">Tentang</a>
+        <a href="#contact">Kontak</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="panel hero-left">
+        <div class="kicker">
+          <span class="pill">Computer Vision • Android • Web • Data</span>
+          <span class="pill">TFLite • Kotlin MVVM • Laravel</span>
+        </div>
+
+        <h1>Bangun solusi nyata, bukan sekadar “demo”.</h1>
+
+        <p class="sub">
+          Saya <b>Muh. Hafiz</b>, lulusan Informatika yang fokus pada <span class="hi">Computer Vision</span> (klasifikasi penyakit batang buah naga)
+          dan implementasi ke aplikasi <span class="hi">Android (Kotlin + TFLite)</span>. Saya juga mengerjakan web CRUD (Laravel) serta analisis data & Excel dashboard.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#projects" aria-label="Lihat proyek">
+            Lihat Proyek
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn" href="#contact" aria-label="Kontak">
+            Hubungi Saya
+          </a>
+          <a class="btn" href="#" id="cvBtn" aria-label="Download CV">
+            Download CV
+          </a>
+        </div>
+
+        <div class="mini">
+          <span class="muted">Link cepat:</span>
+          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="#" id="emailQuick">Email</a>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="muted" style="font-size:13px">
+          Catatan: Jika kamu ingin peluang kerja lebih tinggi, jangan tampilkan banyak proyek setengah jadi.
+          Tampilkan 3–5 proyek yang paling kuat, dan tulis bukti + dampaknya.
+        </div>
+      </div>
+
+      <div class="panel hero-right">
+        <div class="card">
+          <h3>Highlight</h3>
+          <div class="metric">
+            <div>
+              <b>CV → Android App (TFLite)</b><br/>
+              <span>Deploy model EfficientNetB0 ke aplikasi Kotlin MVVM</span>
+            </div>
+            <span class="badge">CV/ML</span>
+          </div>
+          <div class="metric">
+            <div>
+              <b>Dataset & Evaluasi</b><br/>
+              <span>Preprocess + augmentasi + confusion matrix</span>
+            </div>
+            <span class="badge">Research</span>
+          </div>
+          <div class="metric">
+            <div>
+              <b>Web CRUD (Laravel)</b><br/>
+              <span>Auth, role, dashboard, manajemen data</span>
+            </div>
+            <span class="badge">Web</span>
+          </div>
+
+          <div class="tagrow">
+            <span class="tag">EfficientNetB0</span>
+            <span class="tag">TensorFlow / Keras</span>
+            <span class="tag">TFLite</span>
+            <span class="tag">Kotlin MVVM</span>
+            <span class="tag">Laravel</span>
+            <span class="tag">Excel Dashboard</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Yang saya incar</h3>
+          <p class="muted" style="margin:0">
+            Role yang relevan: <b>Junior Android Developer</b>, <b>Web Developer</b>, atau <b>Data/Reporting</b>.
+            Saya siap menunjukkan repo, demo, dan dokumentasi.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">
+        <h2>Proyek Unggulan</h2>
+        <p>Fokus: kualitas, bukti, dan dokumentasi</p>
+      </div>
+
+      <div class="grid">
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>PitayaStemVision — Klasifikasi Penyakit Batang Buah Naga</h3>
+              <p>EfficientNetB0 → TFLite → Android (Kotlin MVVM). Fokus deploy & UX, bukan sekadar training.</p>
+            </div>
+            <span class="badge">CV/Android</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">EfficientNetB0</span><span class="tag">Sigmoid/BCE</span><span class="tag">TFLite</span><span class="tag">Room DB</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">Repo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Demo / APK</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Dokumentasi</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>Dashboard Penjualan — Excel (Pivot + Chart)</h3>
+              <p>Data cleaning, pivot table, ringkasan KPI, visualisasi. Cocok untuk role admin/reporting.</p>
+            </div>
+            <span class="badge">Excel/Data</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Power Query (opsional)</span><span class="tag">Pivot</span><span class="tag">KPI</span><span class="tag">Chart</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">File</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">README</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>Website CRUD Laravel — Pemesanan Makanan</h3>
+              <p>Multi-role (pembeli/penjual), autentikasi, kelola toko & menu, status pesanan.</p>
+            </div>
+            <span class="badge">Web</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Auth</span><span class="tag">Dashboard</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">Repo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Live Demo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Dokumentasi</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>Website Wisata Desa — Virtual 360 + CRUD</h3>
+              <p>Landing wisata + manajemen konten. Fokus storytelling dan pengalaman pengguna.</p>
+            </div>
+            <span class="badge">Web</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Laravel</span><span class="tag">360 Viewer</span><span class="tag">CMS Mini</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">Repo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Live Demo</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>Aplikasi Bioskop — Firebase</h3>
+              <p>Pemesanan tiket sederhana, list film, detail, dan penyimpanan order (Firebase).</p>
+            </div>
+            <span class="badge">Android</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Kotlin</span><span class="tag">Firebase</span><span class="tag">UI</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">Repo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Demo</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <div>
+              <h3>Undangan Pernikahan Online — Native Web</h3>
+              <p>Fast-loading, responsive, animasi ringan. Cocok untuk menunjukkan UI dan performance.</p>
+            </div>
+            <span class="badge">Frontend</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">HTML/CSS</span><span class="tag">Responsive</span><span class="tag">Performance</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noreferrer">Repo</a>
+            <a class="link" href="#" target="_blank" rel="noreferrer">Live</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-title">
+        <h2>Keahlian</h2>
+        <p>Yang benar-benar kamu gunakan di proyek</p>
+      </div>
+
+      <div class="two-col">
+        <div class="list">
+          <b>Core Stack</b>
+          <ul>
+            <li><span class="hi">Computer Vision</span>: preprocessing, augmentation, training, evaluasi (confusion matrix, per-class metrics)</li>
+            <li><span class="hi">Deployment</span>: TensorFlow Lite, inference pipeline, thresholding</li>
+            <li><span class="hi">Android</span>: Kotlin, MVVM, Retrofit, Room, UI</li>
+            <li><span class="hi">Web</span>: Laravel CRUD, Auth, MySQL</li>
+          </ul>
+        </div>
+        <div class="list">
+          <b>Data & Tools</b>
+          <ul>
+            <li><span class="hi">Excel</span>: cleaning, pivot, dashboard, visualisasi</li>
+            <li>Python: Pandas, training pipeline (TF/Keras)</li>
+            <li>Git/GitHub: repo, dokumentasi README</li>
+            <li>Komunikasi: laporan, dokumentasi, presentasi</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">
+        <h2>Tentang Saya</h2>
+        <p>Singkat, relevan, dan bisa diverifikasi</p>
+      </div>
+
+      <div class="two-col">
+        <div class="list">
+          <b>Profil</b>
+          <p class="muted" style="margin:10px 0 0">
+            Saya membangun proyek dari riset sampai implementasi aplikasi.
+            Fokus saya: membuat solusi yang bisa dipakai, dokumentasinya jelas, dan bisa dinilai dari hasil nyata (repo, demo, dan laporan).
+          </p>
+        </div>
+        <div class="list">
+          <b>Nilai kerja</b>
+          <ul>
+            <li><span class="hi">Evidence-driven</span>: klaim harus ada buktinya (repo/demo)</li>
+            <li><span class="hi">Iteratif</span>: perbaikan berdasarkan evaluasi</li>
+            <li><span class="hi">Praktis</span>: lebih penting deploy daripada “akurasi cantik”</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h2>Kontak</h2>
+        <p>Pilih yang paling cepat: email atau WhatsApp</p>
+      </div>
+
+      <div class="contact">
+        <div>
+          <b style="font-size:18px">Mari bicara soal peluang kerja / kolaborasi.</b>
+          <p class="muted" style="margin:8px 0 0">
+            Kirim ringkas: role yang kamu tawarkan, deadline, dan link deskripsi pekerjaan. Saya balas dengan bukti proyek yang relevan.
+          </p>
+          <div class="hr"></div>
+          <div class="tagrow">
+            <span class="tag">Email: <span id="emailText">muh.hafizz80@gmail.com</span></span>
+            <span class="tag">WA: <span id="waText">0853-4399-5165</span></span>
+            <span class="tag">Lokasi: Samarinda (ID)</span>
+          </div>
+        </div>
+
+        <form class="form" onsubmit="return false;">
+          <input id="name" placeholder="Nama" />
+          <input id="company" placeholder="Perusahaan / Tim" />
+          <textarea id="message" placeholder="Pesan singkat (role + kebutuhan + deadline)"></textarea>
+          <button class="btn primary" id="copyBtn">Copy Pesan untuk Email</button>
+          <span class="muted" style="font-size:12px">Tombol ini menyalin template email ke clipboard (lebih cepat daripada form palsu).</span>
+        </form>
+      </div>
+
+      <div class="foot">
+        <span>© <span id="year"></span> Muh. Hafiz • Portofolio</span>
+        <span class="muted">Dibuat dengan HTML/CSS native • Cepat • Mudah di-host di GitHub Pages</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ====== CONFIG (ubah ini) ======
+    const CONFIG = {
+      fullName: "Muh. Hafiz",
+      email: "muh.hafizz80@gmail.com",
+      whatsapp: "085343995165",
+      cvUrl: "#", // isi link CV kamu (Google Drive/Dropbox/hosted)
+      githubUrl: "https://github.com/",
+      linkedinUrl: "https://www.linkedin.com/"
+    };
+
+    // Quick fill
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("emailText").textContent = CONFIG.email;
+    document.getElementById("waText").textContent = CONFIG.whatsapp;
+
+    // Nav quick links in hero
+    const emailQuick = document.getElementById("emailQuick");
+    emailQuick.href = `mailto:${CONFIG.email}?subject=Kesempatan%20Kerja%20/%20Kolaborasi%20-%20${encodeURIComponent(CONFIG.fullName)}`;
+
+    // CV button
+    const cvBtn = document.getElementById("cvBtn");
+    cvBtn.href = CONFIG.cvUrl;
+    if (CONFIG.cvUrl === "#") {
+      cvBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("Isi dulu link CV kamu di bagian CONFIG (cvUrl).");
+      });
+    }
+
+    // Copy email template
+    const copyBtn = document.getElementById("copyBtn");
+    copyBtn.addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim() || "[Nama Anda]";
+      const company = document.getElementById("company").value.trim() || "[Perusahaan/Tim]";
+      const msg = document.getElementById("message").value.trim() || "[Jelaskan role + kebutuhan + deadline]";
+
+      const template =
+`Halo ${CONFIG.fullName},
+
+Saya ${name} dari ${company}.
+${msg}
+
+Boleh saya minta:
+1) Link repo/demo yang paling relevan
+2) Ketersediaan jadwal untuk diskusi singkat
+
+Terima kasih.`;
+
+      try{
+        await navigator.clipboard.writeText(template);
+        copyBtn.textContent = "Tersalin. Buka Email dan Paste";
+        setTimeout(()=> copyBtn.textContent = "Copy Pesan untuk Email", 2200);
+      }catch(e){
+        alert("Gagal menyalin. Browser kamu mungkin memblok clipboard. Copy manual saja.");
+      }
+    });
+  </script>
+</body>
+</html>
