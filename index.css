@@ -259,20 +259,26 @@ h1 {
     font-size: 13px
 }
 
-.tagrow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px
+.tagrow{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px auto 0;   /* ini yang nge-center bloknya */
+  width: fit-content;   /* bikin lebarnya ngikut isi */
+  flex-wrap: wrap;      /* biar aman kalau layar kecil */
+  justify-content: center;
 }
 
+
 .tag {
+    justify-content: center;
+    display: flex;
+    align-items: center;            
     padding: 6px 10px;
     border-radius: 999px;
     border: 1px solid var(--line);
-    
     color: var(--muted);
-    font-size: 12px;
+    font-size: 18px;
     white-space: nowrap;
 }
 
@@ -418,11 +424,10 @@ section {
 
 /* CONTACT */
 .contact {
-    padding: 8px;
+    padding: 12px;
     border-radius: var(--radius);
     border: 1px solid var(--line);
     background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
-    display: grid;
     grid-template-columns: 1.2fr .8fr;
     gap: 14px;
     align-items: center;
@@ -477,4 +482,136 @@ textarea {
     height: 1px;
     background: var(--line);
     margin: 18px 0
+}
+
+@media (max-width: 768px) {
+
+  /* CONTAINER */
+  .container {
+    padding: 14px;
+  }
+
+  /* NAV — ringkas */
+  .nav-inner {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+  }
+
+  .nav-links {
+    display: none; /* sembunyikan menu di mobile */
+  }
+
+  /* HERO LAYOUT */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 20px 0;
+    gap: 14px;
+  }
+
+  .hero-left,
+  .hero-right {
+    padding: 16px;
+  }
+
+  /* PILL / STACK INFO */
+  .pill {
+    font-size: 11px;
+    padding: 5px 8px;
+    line-height: 1.4;
+  }
+
+  /* HEADLINE — FIX UTAMA */
+  h1 {
+    font-size: 26px;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+    margin: 12px 0 8px;
+  }
+
+  /* DESKRIPSI */
+  .sub {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  /* CTA — WAJIB FULL WIDTH */
+  .cta-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .btn.primary {
+    font-size: 15px;
+  }
+
+  /* MINI LINKS */
+  .mini {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  /* HERO RIGHT — JANGAN TERLIHAT SEPERTI PANEL KEDUA */
+  .hero-right {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .hero-right .card {
+    padding: 14px;
+  }
+
+  /* METRIC */
+  .metric {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* TAGS — JANGAN BESAR */
+  .tagrow {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .tag {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  /* SECTION TITLE */
+  .section-title h2 {
+    font-size: 20px;
+  }
+
+  /* PROJECT CARD */
+  .proj {
+    padding: 14px;
+  }
+
+  .proj h3 {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  .proj p {
+    font-size: 13px;
+  }
+
+  /* FOOTER */
+  .foot {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    font-size: 12px;
+  }
 }
