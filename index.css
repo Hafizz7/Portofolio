@@ -259,26 +259,20 @@ h1 {
     font-size: 13px
 }
 
-.tagrow{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 8px auto 0;   /* ini yang nge-center bloknya */
-  width: fit-content;   /* bikin lebarnya ngikut isi */
-  flex-wrap: wrap;      /* biar aman kalau layar kecil */
-  justify-content: center;
+.tagrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px
 }
 
-
 .tag {
-    justify-content: center;
-    display: flex;
-    align-items: center;            
     padding: 6px 10px;
     border-radius: 999px;
     border: 1px solid var(--line);
+    
     color: var(--muted);
-    font-size: 18px;
+    font-size: 12px;
     white-space: nowrap;
 }
 
@@ -424,14 +418,45 @@ section {
 
 /* CONTACT */
 .contact {
-    padding: 12px;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
-    grid-template-columns: 1.2fr .8fr;
-    gap: 14px;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  padding: 20px 28px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.03)
+  );
 }
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-item .label {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.contact-item a,
+.contact-item .value {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
 
 @media (max-width: 900px) {
     .contact {
@@ -462,7 +487,7 @@ textarea {
 }
 
 .foot {
-    padding: 12px 0 1px;
+    padding: 26px 0 40px;
     color: var(--muted);
     font-size: 13px;
     display: flex;
@@ -484,6 +509,10 @@ textarea {
     margin: 18px 0
 }
 
+
+/* ============================= */
+/* MOBILE HERO REBUILD */
+/* ============================= */
 @media (max-width: 768px) {
 
   /* CONTAINER */
