@@ -643,4 +643,17 @@ textarea {
     text-align: center;
     font-size: 12px;
   }
+  .contact-item {  
+  gap: 1px;
+}
+  .contact-item .label {
+  font-size: 8px;
+  
+}
+
+.contact-item a,
+.contact-item .value {
+  font-size: 10px;
+  
+}
 }
